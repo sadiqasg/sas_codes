@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title>Sadiq Molecule Editor</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./resource/main.css">
+</head>
+<body>
+	<h1 id="header">Molecule Text [v0.1 beta]</h1>
+	<p id="p">Result:</p>
+	<div id="result" contentEditable="true" data-text="Result">
+		<div id="run"></div>
+	</div>
+
+<table width="100%">
+	<tr>
+		<td colspan="5">
+			<textarea id="text" placeholder="Enter your HTML codes here.&#10;&#10;Note: Use only inline CSS for your styles for now!"></textarea>
+			<button id="button" onclick="run()">Run</button>
+		</td>
+	</tr>
+	<tr style="margin-top:0px;"><td></td>
+		<td style="text-align:center;font-weight:bolder;">Save your file or load one from your device</td></tr>
+	<tr class="tr">
+		<td>Filename to Save As:</td>
+		<td><input id="inputFileNameToSaveAs" placeholder="Save file with .ext of the text language" style="width:80%;"></input></td>
+		<td><button onclick="saveTextAsFile()">Save File</button></td>
+	</tr>
+	<tr class="tr">
+		<td>Select a File to Load:</td>
+		<td><input type="file" id="fileToLoad"></td>
+		<td><button onclick="loadFileAsText()">Load Selected File</button></td>
+	</tr>
+</table>
+
+<footer>
+	Created by Sadiq | sadiqasg@gmail.com
+</footer>
+
+
+<script src="./resource/main.js"></script>
+
+</body>
+</html>
