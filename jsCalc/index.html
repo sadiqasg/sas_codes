@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Simple Calc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <main>
+        <form name="sascalc">
+            <table border="3">
+                <tr style="text-align: center;"><td>Simple Calculator</td></tr>
+
+                <tr>
+                    <td>
+                        <input type="text" name="Input" size="20">
+                    </td>
+                    <td>SAS</td>
+                </tr>
+                <tr>
+                    <td>                        
+                        <input type="button" class="btn" name="one" value="1" onclick="sascalc.Input.value += '1'" /> 
+                        <input type="button" class="btn" name="two" value="2" onclick="sascalc.Input.value += '2'" /> 
+                        <input type="button" class="btn" name="three" value="3" onclick="sascalc.Input.value += '3'" /> 
+                        <input type="button" class="btn" name="add" value="+" onclick="sascalc.Input.value += '+'" /> 
+                        <br />
+                        <input type="button" class="btn" name="four" value="4" onclick="sascalc.Input.value += '4'" /> 
+                        <input type="button" class="btn" name="five" value="5" onclick="sascalc.Input.value += '5'" /> 
+                        <input type="button" class="btn" name="six" value="6" onclick="sascalc.Input.value += '6'" /> 
+                        <input type="button" class="btn" name="minus" value="-" onclick="sascalc.Input.value += '-'" />
+                        <br />
+                        <input type="button" class="btn" name="seven" value="7" onclick="sascalc.Input.value += '7'" /> 
+                        <input type="button" class="btn" name="eight" value="8" onclick="sascalc.Input.value += '8'" /> 
+                        <input type="button" class="btn" name="nine" value="9" onclick="sascalc.Input.value += '9'" /> 
+                        <input type="button" class="btn" name="multi" value="*" onclick="sascalc.Input.value += '*'" />
+                        <br />
+                        <input type="button" class="btn" name="point" value="." onclick="sascalc.Input.value += '.'" /> 
+                        <input type="button" class="btn" name="zero" value="0" onclick="sascalc.Input.value += '0'" /> 
+                        <input type="button" class="btn clear" name="clear" value="C" onclick="sascalc.Input.value = ' '" /> 
+                        <input type="button" class="btn" name="divide" value="/" onclick="sascalc.Input.value += '/'" />                                                                           
+                    </td>
+                    <td>
+                            <input type="button" class="ebtn" name="solve" value="=" onclick="sascalc.Input.value = eval(sascalc.Input.value)" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </main>
+</body>
+</html>

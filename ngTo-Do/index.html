@@ -1,0 +1,196 @@
+<head>
+    <!-- custom styles -->
+    <style type="text/css">
+        #app {
+            overflow: hidden;
+        }
+        p {
+             display: block;
+             width: 100%;
+             margin: 5px;
+             text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+        }
+        ul li {
+            /* align ul li with transparent border */
+            border: solid 1px transparent;
+            padding: 5px;
+            margin: 5px;
+            box-shadow: 2px 3px 3px lightgrey;
+        }
+        ul li span {
+            color: darkorange;
+            font-size: 1.1em;
+            float: right;
+        }
+        @keyframes item {
+            from {
+                opacity: 0.5;
+                margin-left: 30px;
+            } to {
+                opacity: 1;
+                margin-left: 0;
+            }
+        }
+        .item {
+            animation-name: item;
+            animation-iteration-count: 1;
+            animation-duration: 4s;
+        }
+        #darkCheck {
+            margin: 4px;
+        }
+        .dark {
+            background-color: #1a1a1a;
+            color: grey;
+        }
+        .btn {
+            font-size: 0.9em;
+            margin: auto;
+            margin-top: 15px;
+            box-shadow: 2px 3px 3px lightgrey;
+        }
+        .darkShadow {
+            box-shadow: 2px 4px 4px black;
+        }
+        .time {
+            color: darkorange;
+        }
+    </style>
+</head>
+<body class="container-fluid">
+    <div id="app" class="row d-flex" v-bind:class="{ dark : darkChecked }">
+    
+    <div class="header">
+        <label for="darkCheck">Dark theme</label>
+        <input type="checkbox" id="darkCheck" v-model="darkChecked"/>
+        
+        <div class="time">{{ hour }}</div>
+    </div>
+        
+    <!-- app body -->
+    <div class="container">
+    <h3><label for="userInput">Todo List</label></h3>
+        <form v-on:submit.prevent="onSubmit"/>
+            <input v-model="userInput" id="userInput" autofocus/>
+        <input type="submit" value="Add"/>
+        </form>
+        <ul>
+            <li v-for="item in todo" v-bind:class="{ darkShadow : darkChecked }" class="item">
+                {{ item.id + ' -' }}
+                {{ ' ' + item.content}}
+                <span @click="removeFromTodo(item)">&times</span>
+            </li>
+        </ul>
+    </div>
+    <!-- app body2 -->
+    <div class="container">
+    <button class="btn btn-default" id="btnShuffle" v-bind:class="{ darkShadow : darkChecked }" @click="shuffleTodo()">What shoud I do first ?</button>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+
+    <!-- scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.js"></script>
+    <script>
+        window.onload = function() {
+    
+        var app = new Vue({
+            el : '#app',
+            data : {
+                darkChecked : true,
+                hour : '',
+                userInput : '',
+                todo : [
+                    { content : 'Learn more JS' },
+                    { content : 'Watch Naruto' },
+                    { content : 'Reward myself some accolades' },
+                    { content : 'Get back to coding' }
+                ],
+                ask : '',
+            },
+            methods : {
+                //return time string
+                date : function() {
+                    var d = new Date();
+                    var str = "";
+                    str += d.getHours() + ' : ';
+                    str += d.getMinutes() + ' : ';
+                    str += d.getSeconds();
+                    return str;
+                },
+                
+                //create id for todo[]
+                setTodoId : function() {
+                    for(var i = 0; i < this.todo.length; i++) {
+                        this.todo[i].id = i+1;
+                    }
+                },
+               
+                onSubmit : function() {
+                   if(this.userInput != '') {
+                       var object = { content : this.userInput };
+                       this.todo.push(object);
+                       //create new id
+                       this.setTodoId();
+                       //clear input
+                       this.userInput = '';
+                       //select input
+                        document.querySelector('#userInput').focus();
+                       
+                    } else {
+                        //handleError
+                    }
+                },
+                
+                removeFromTodo : function(obj) {
+                    this.todo.splice(obj.id-1, 1);
+                    //create new id
+                    this.setTodoId();
+                },
+                
+                shuffleTodo : function() {
+                   var c = this.todo.length;
+                   while(c > 0) {
+                       //random index
+                       var randomIndex = Math.floor(Math.random() * c);
+                       //c-- to break loop
+                       c--;
+                       //swap last with random
+                       var tmp = this.todo[c];
+                       this.todo[c] = this.todo[randomIndex];
+                       this.todo[randomIndex] = tmp;
+                   }
+                   //new id order
+                   this.setTodoId();
+                   //append string
+                   var p = document.querySelector('#stringSpot');
+                   if(this.todo.length > 1) {
+                       var answer = 'Hm I think this way is better :)';
+                   } else {
+                       var answer = "If you only have one thing to do why are you still here ?"
+                   }
+                   p.innerHTML = answer;
+                   //remove text
+                   setTimeout(function() {
+                       p.innerHTML = '...';
+                   }, 3000)
+                },
+                
+            }
+        })
+            //first call 
+            app.setTodoId();
+            //call new date instant
+            app.hour = app.date();
+            //refresh every second
+            setInterval(function() {
+                app.hour = app.date();
+            }, 1000)
+        }
+    </script>
+</body>

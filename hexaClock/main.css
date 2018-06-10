@@ -1,0 +1,21 @@
+body {
+    color: white;
+}
+
+#txt {
+    color: white;
+    font-family: "Lato";
+    font-weight: 200px;
+    font-size: 82px;
+    text-align: center;
+    border: 10px outset white;
+
+
+#color {
+    color: white;
+    font-family: "Lato";
+    font-weight: 300px;
+    font-size: 50px;
+    text-align: center;
+     border: 10px inset white;
+}
