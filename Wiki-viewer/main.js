@@ -1,6 +1,6 @@
 //variables
-var searchQuery;
-var url;
+let searchQuery;
+let url;
 
 //enter key no-jutsu
 $("#input").keyup(function(event) {
